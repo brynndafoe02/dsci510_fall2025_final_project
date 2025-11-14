@@ -8,3 +8,5 @@ FIS_scoresheet_pdfs/*.pdf
 Group1/*.csv
 Group2/*.csv
 olympic_results/*.csv
+.DS_Store
+Thumbs.db
