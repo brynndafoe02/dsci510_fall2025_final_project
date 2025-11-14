@@ -12,7 +12,7 @@ Files:
 - 'Olympic_Results.py' : pulls Olympic results (Rank, Name, Country) from urls using json and regular expressions, creates a folder of .csv files
 - 'World_Cup_Results.py' : pulls World Cup results (Rank, FIS Code, Name, Nation, Birth Year, Final Score, Time Points, Air Points, and Turn Points) from urls using pdfplumber, creates a folder for processed .pdf files, and a folder of .csv files for each ski season
 - 'tests.py' : tests the code in the .py files
-- 'doc/progress_report.pdf' : Progress report.
+- 'doc/Brynn_Dafoe_progress_report.pdf' : Progress report. Download to open the file.
 - 'requirements.txt' : Python dependencies.
 
 How to Run:
