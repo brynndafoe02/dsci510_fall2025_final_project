@@ -3,7 +3,6 @@
 __pycache__/
 *.pyc
 *.csv
-*.pdf
 FIS_scoresheet_pdfs/*.pdf
 Group1/*.csv
 Group2/*.csv
