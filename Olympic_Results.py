@@ -20,7 +20,7 @@ def get_olympic_results(urls_olympics : list):
         
         headers = {"User-Agent": "OlympicResults/Skiing"}
         
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=10)
         html = response.text
     
         # what the source page shows with the data I want to pull -> *** BELOW

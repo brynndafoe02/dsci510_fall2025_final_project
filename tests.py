@@ -22,11 +22,17 @@ if __name__ == "__main__":
     pdf_urls1 = {"Group 1": ["https://medias1.fis-ski.com/pdf/2025/FS/8105/2025FS8105RLF.pdf"], "Group 2": ["https://medias2.fis-ski.com/pdf/2025/FS/8237/2025FS8237RLF.pdf", "https://medias4.fis-ski.com/pdf/2025/FS/8254/2025FS8254RLF.pdf"]}
 
     #####
-    pdf_urls_wc = {
+    # I found that some of my files are in FRL style (Final Results List)
+        # example: https://medias1.fis-ski.com/pdf/2015/FS/8106/2015FS8106FRL.pdf
+    # and some in RLF style (Results List Final)
+        # example: https://medias1.fis-ski.com/pdf/2017/FS/8271/2017FS8271RLF.pdf
+    # my code is currently only set up to parse RLF style because I did not realize there were two types, so I will be manually making the CSV files for the 18 FRL style PDFs because it is a little too late for me now to make code to parse the FRL files
+    pdf_urls_wc_FRL = {
         "M_2015_1" : ["https://medias1.fis-ski.com/pdf/2015/FS/8106/2015FS8106FRL.pdf", "https://medias1.fis-ski.com/pdf/2015/FS/8335/2015FS8335FRL.pdf", "https://medias1.fis-ski.com/pdf/2015/FS/8352/2015FS8352FRL.pdf", "https://medias3.fis-ski.com/pdf/2015/FS/8112/2015FS8112FRL.pdf", "https://medias4.fis-ski.com/pdf/2015/FS/8214/2015FS8214FRL.pdf"], 
         "W_2015_1" : ["https://medias2.fis-ski.com/pdf/2015/FS/8105/2015FS8105FRL.pdf", "https://medias4.fis-ski.com/pdf/2015/FS/8333/2015FS8333FRL.pdf", "https://medias2.fis-ski.com/pdf/2015/FS/8351/2015FS8351FRL.pdf", "https://medias1.fis-ski.com/pdf/2015/FS/8111/2015FS8111FRL.pdf", "https://medias1.fis-ski.com/pdf/2015/FS/8213/2015FS8213FRL.pdf"],
         "M_2016_1" : ["https://medias1.fis-ski.com/pdf/2016/FS/8091/2016FS8091FRL.pdf", "https://medias2.fis-ski.com/pdf/2016/FS/8093/2016FS8093FRL.pdf", "https://medias3.fis-ski.com/pdf/2016/FS/8399/2016FS8399FRL.pdf", "https://medias2.fis-ski.com/pdf/2016/FS/8249/2016FS8249FRL.pdf"],
-        "W_2016_1" : ["https://medias2.fis-ski.com/pdf/2016/FS/8090/2016FS8090FRL.pdf", "https://medias4.fis-ski.com/pdf/2016/FS/8092/2016FS8092FRL.pdf", "https://medias2.fis-ski.com/pdf/2016/FS/8397/2016FS8397FRL.pdf", "https://medias1.fis-ski.com/pdf/2016/FS/8248/2016FS8248FRL.pdf"],
+        "W_2016_1" : ["https://medias2.fis-ski.com/pdf/2016/FS/8090/2016FS8090FRL.pdf", "https://medias4.fis-ski.com/pdf/2016/FS/8092/2016FS8092FRL.pdf", "https://medias2.fis-ski.com/pdf/2016/FS/8397/2016FS8397FRL.pdf", "https://medias1.fis-ski.com/pdf/2016/FS/8248/2016FS8248FRL.pdf"]}
+    pdf_urls_wc_RLF = {
         "M_2017_1" : ["https://medias4.fis-ski.com/pdf/2017/FS/8272/2017FS8272RLF.pdf", "https://medias3.fis-ski.com/pdf/2017/FS/8464/2017FS8464RLF.pdf", "https://medias2.fis-ski.com/pdf/2017/FS/8203/2017FS8203RLF.pdf", "https://medias2.fis-ski.com/pdf/2017/FS/8205/2017FS8205RLF.pdf", "https://medias2.fis-ski.com/pdf/2017/FS/8480/2017FS8480RLF.pdf", "https://medias4.fis-ski.com/pdf/2017/FS/8405/2017FS8405RLF.pdf", "https://medias4.fis-ski.com/pdf/2017/FS/8360/2017FS8360RLF.pdf", "https://medias4.fis-ski.com/pdf/2017/FS/8253/2017FS8253RLF.pdf"],
         "W_2017_1" : ["https://medias1.fis-ski.com/pdf/2017/FS/8271/2017FS8271RLF.pdf", "https://medias1.fis-ski.com/pdf/2017/FS/8463/2017FS8463RLF.pdf", "https://medias1.fis-ski.com/pdf/2017/FS/8202/2017FS8202RLF.pdf", "https://medias3.fis-ski.com/pdf/2017/FS/8204/2017FS8204RLF.pdf", "https://medias3.fis-ski.com/pdf/2017/FS/8479/2017FS8479RLF.pdf", "https://medias1.fis-ski.com/pdf/2017/FS/8404/2017FS8404RLF.pdf", "https://medias4.fis-ski.com/pdf/2017/FS/8359/2017FS8359RLF.pdf", "https://medias2.fis-ski.com/pdf/2017/FS/8252/2017FS8252RLF.pdf"],
         "M_2018_1" : ["https://medias2.fis-ski.com/pdf/2018/FS/8148/2018FS8148RLF.pdf", "https://medias1.fis-ski.com/pdf/2018/FS/8138/2018FS8138RLF.pdf", "https://medias2.fis-ski.com/pdf/2018/FS/8114/2018FS8114RLF.pdf", "https://medias4.fis-ski.com/pdf/2018/FS/8281/2018FS8281RLF.pdf", "https://medias2.fis-ski.com/pdf/2018/FS/8120/2018FS8120RLF.pdf"],
@@ -47,7 +53,7 @@ if __name__ == "__main__":
         "W_2025_3" : ["https://medias2.fis-ski.com/pdf/2025/FS/8106/2025FS8106RLF.pdf", "https://medias2.fis-ski.com/pdf/2025/FS/8238/2025FS8238RLF.pdf", "https://medias1.fis-ski.com/pdf/2025/FS/8128/2025FS8128RLF.pdf", "https://medias1.fis-ski.com/pdf/2025/FS/8255/2025FS8255RLF.pdf", "https://medias2.fis-ski.com/pdf/2025/FS/8071/2025FS8071RLF.pdf", "https://medias2.fis-ski.com/pdf/2025/FS/8259/2025FS8259RLF.pdf", "https://medias4.fis-ski.com/pdf/2025/FS/8099/2025FS8099RLF.pdf", "https://medias1.fis-ski.com/pdf/2025/FS/8172/2025FS8172RLF.pdf", "https://medias4.fis-ski.com/pdf/2025/FS/8166/2025FS8166RLF.pdf"]}
     #####
     
-    get_WC_results(pdf_urls_wc)
+    get_WC_results(pdf_urls_wc_RLF)
     print("Done getting World Cup Results_______________\n")
 
     #################################################################
@@ -55,7 +61,7 @@ if __name__ == "__main__":
     # Olympic Results
     print("Getting Olympic Results_______________")
     # just testing with 2 URLs for now
-    urls_olympics1 = ["https://www.olympics.com/en/olympic-games/beijing-2022/results/freestyle-skiing/men-moguls", "https://www.olympics.com/en/olympic-games/pyeongchang-2018/results/freestyle-skiing/mens-moguls"]
+    urls_olympics1 = {"A" : "https://www.olympics.com/en/olympic-games/beijing-2022/results/freestyle-skiing/men-moguls", "B" : "https://www.olympics.com/en/olympic-games/pyeongchang-2018/results/freestyle-skiing/mens-moguls"}
 
     #####
     urls_olympics = {
@@ -65,7 +71,7 @@ if __name__ == "__main__":
         "W_2022_2" : "https://www.olympics.com/en/olympic-games/beijing-2022/results/freestyle-skiing/women-moguls"}
     #####
     
-    get_olympic_results(urls_olympics)
+    get_olympic_results(urls_olympics1)
     print("Done getting Olympic Results_______________\n")
 
     #################################################################
