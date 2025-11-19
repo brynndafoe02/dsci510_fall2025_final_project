@@ -17,9 +17,6 @@ if __name__ == "__main__":
 
     # WC Results
     print("Getting World Cup Results_______________")
-    # Will be grouping my urls together by ski season. Testing my dictionary on 3 of them
-    # Will change "Group 1" and such later to something like "2017 Season"
-    pdf_urls1 = {"Group 1": ["https://medias1.fis-ski.com/pdf/2025/FS/8105/2025FS8105RLF.pdf"], "Group 2": ["https://medias2.fis-ski.com/pdf/2025/FS/8237/2025FS8237RLF.pdf", "https://medias4.fis-ski.com/pdf/2025/FS/8254/2025FS8254RLF.pdf"]}
 
     #####
     # I found that some of my files are in FRL style (Final Results List)
@@ -53,15 +50,13 @@ if __name__ == "__main__":
         "W_2025_3" : ["https://medias2.fis-ski.com/pdf/2025/FS/8106/2025FS8106RLF.pdf", "https://medias2.fis-ski.com/pdf/2025/FS/8238/2025FS8238RLF.pdf", "https://medias1.fis-ski.com/pdf/2025/FS/8128/2025FS8128RLF.pdf", "https://medias1.fis-ski.com/pdf/2025/FS/8255/2025FS8255RLF.pdf", "https://medias2.fis-ski.com/pdf/2025/FS/8071/2025FS8071RLF.pdf", "https://medias2.fis-ski.com/pdf/2025/FS/8259/2025FS8259RLF.pdf", "https://medias4.fis-ski.com/pdf/2025/FS/8099/2025FS8099RLF.pdf", "https://medias1.fis-ski.com/pdf/2025/FS/8172/2025FS8172RLF.pdf", "https://medias4.fis-ski.com/pdf/2025/FS/8166/2025FS8166RLF.pdf"]}
     #####
     
-    get_WC_results(pdf_urls_wc_RLF)
+    #get_WC_results(pdf_urls_wc_RLF)
     print("Done getting World Cup Results_______________\n")
 
     #################################################################
 
     # Olympic Results
     print("Getting Olympic Results_______________")
-    # just testing with 2 URLs for now
-    urls_olympics1 = {"A" : "https://www.olympics.com/en/olympic-games/beijing-2022/results/freestyle-skiing/men-moguls", "B" : "https://www.olympics.com/en/olympic-games/pyeongchang-2018/results/freestyle-skiing/mens-moguls"}
 
     #####
     urls_olympics = {
@@ -71,7 +66,7 @@ if __name__ == "__main__":
         "W_2022_2" : "https://www.olympics.com/en/olympic-games/beijing-2022/results/freestyle-skiing/women-moguls"}
     #####
     
-    get_olympic_results(urls_olympics1)
+    get_olympic_results(urls_olympics)
     print("Done getting Olympic Results_______________\n")
 
     #################################################################

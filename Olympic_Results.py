@@ -8,17 +8,19 @@ import os
 # so when looking it up I found that the area in which I want to pull data from
 # is JSON embedded inside, so using json to access it
 
-def get_olympic_results(urls_olympics : list):
+def get_olympic_results(urls_olympics : dict):
     output_folder = "olympic_results"
     
     # since I am making a folder I am using os to create it, will not make the folder if it exists already
     os.makedirs(output_folder, exist_ok=True)
     
-    for olympic_year in urls_olympics: # -> {what year + gender : url}
-        url = urls_olympics[olympic_year] # get url out 
+    for olympic_year, url in urls_olympics.items(): # -> {what year + gender : url}
+    #for url in urls_olympics:
         print(f"Processing: {url}") # for testing, will delete later
         
-        headers = {"User-Agent": "OlympicResults/Skiing"}
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)", 
+            "Connection": "keep-alive"}
         
         response = requests.get(url, headers=headers, timeout=10)
         html = response.text
