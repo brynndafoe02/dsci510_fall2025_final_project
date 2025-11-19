@@ -29,6 +29,7 @@ if __name__ == "__main__":
         "W_2015_1" : ["https://medias2.fis-ski.com/pdf/2015/FS/8105/2015FS8105FRL.pdf", "https://medias4.fis-ski.com/pdf/2015/FS/8333/2015FS8333FRL.pdf", "https://medias2.fis-ski.com/pdf/2015/FS/8351/2015FS8351FRL.pdf", "https://medias1.fis-ski.com/pdf/2015/FS/8111/2015FS8111FRL.pdf", "https://medias1.fis-ski.com/pdf/2015/FS/8213/2015FS8213FRL.pdf"],
         "M_2016_1" : ["https://medias1.fis-ski.com/pdf/2016/FS/8091/2016FS8091FRL.pdf", "https://medias2.fis-ski.com/pdf/2016/FS/8093/2016FS8093FRL.pdf", "https://medias3.fis-ski.com/pdf/2016/FS/8399/2016FS8399FRL.pdf", "https://medias2.fis-ski.com/pdf/2016/FS/8249/2016FS8249FRL.pdf"],
         "W_2016_1" : ["https://medias2.fis-ski.com/pdf/2016/FS/8090/2016FS8090FRL.pdf", "https://medias4.fis-ski.com/pdf/2016/FS/8092/2016FS8092FRL.pdf", "https://medias2.fis-ski.com/pdf/2016/FS/8397/2016FS8397FRL.pdf", "https://medias1.fis-ski.com/pdf/2016/FS/8248/2016FS8248FRL.pdf"]}
+    
     pdf_urls_wc_RLF = {
         "M_2017_1" : ["https://medias4.fis-ski.com/pdf/2017/FS/8272/2017FS8272RLF.pdf", "https://medias3.fis-ski.com/pdf/2017/FS/8464/2017FS8464RLF.pdf", "https://medias2.fis-ski.com/pdf/2017/FS/8203/2017FS8203RLF.pdf", "https://medias2.fis-ski.com/pdf/2017/FS/8205/2017FS8205RLF.pdf", "https://medias2.fis-ski.com/pdf/2017/FS/8480/2017FS8480RLF.pdf", "https://medias4.fis-ski.com/pdf/2017/FS/8405/2017FS8405RLF.pdf", "https://medias4.fis-ski.com/pdf/2017/FS/8360/2017FS8360RLF.pdf", "https://medias4.fis-ski.com/pdf/2017/FS/8253/2017FS8253RLF.pdf"],
         "W_2017_1" : ["https://medias1.fis-ski.com/pdf/2017/FS/8271/2017FS8271RLF.pdf", "https://medias1.fis-ski.com/pdf/2017/FS/8463/2017FS8463RLF.pdf", "https://medias1.fis-ski.com/pdf/2017/FS/8202/2017FS8202RLF.pdf", "https://medias3.fis-ski.com/pdf/2017/FS/8204/2017FS8204RLF.pdf", "https://medias3.fis-ski.com/pdf/2017/FS/8479/2017FS8479RLF.pdf", "https://medias1.fis-ski.com/pdf/2017/FS/8404/2017FS8404RLF.pdf", "https://medias4.fis-ski.com/pdf/2017/FS/8359/2017FS8359RLF.pdf", "https://medias2.fis-ski.com/pdf/2017/FS/8252/2017FS8252RLF.pdf"],
@@ -66,7 +67,7 @@ if __name__ == "__main__":
         "W_2022_2" : "https://www.olympics.com/en/olympic-games/beijing-2022/results/freestyle-skiing/women-moguls"}
     #####
     
-    get_olympic_results(urls_olympics)
+    #get_olympic_results(urls_olympics)
     print("Done getting Olympic Results_______________\n")
 
     #################################################################
