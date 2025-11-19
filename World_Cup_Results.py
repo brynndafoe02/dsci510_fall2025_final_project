@@ -59,18 +59,22 @@ def get_WC_results(pdf_urls : dict):
                         words = bline.split()
     
                         # rank0, bib1, fis_code2, last_name3, first_name4, nation5, birth_year6, scores7
-                        rank = words[0]
-                        fis_code = words[2]
-                        last_name = words[3]
-                        first_name = words[4]
-                        nation = words[5]
-                        birth_year = words[6]
+                        if len(words) >= 7:
+                            rank = words[0]
+                            fis_code = words[2]
+                            last_name = words[3]
+                            first_name = words[4]
+                            nation = words[5]
+                            birth_year = words[6]
+                        else:
+                            continue # skip, because it means it does have the data I want
     
                         full_name = f"{first_name} {last_name}"
     
                         other_values = []
-                        for word in words[7:]:
-                            other_values.append(word)
+                        if len(words) >= 8:
+                            for word in words[7:]:
+                                other_values.append(word)
                         # gathering the rest of the scores, will filter out for the scores I care about in the csv part
     
                         extracted_data.append([rank, fis_code, full_name, nation, birth_year] + other_values)
