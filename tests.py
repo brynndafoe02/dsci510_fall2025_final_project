@@ -8,6 +8,7 @@ import os
 from World_Cup_Results import get_WC_results
 from Olympic_Results import get_olympic_results
 from Athlete_Data import get_skier_data, make_athlete_data_csv
+from Getting_Athlete_Names import getting_athlete_names
 
 if __name__ == "__main__":
     
@@ -87,3 +88,10 @@ if __name__ == "__main__":
     print("Done getting Athlete Data_______________\n")
 
     #################################################################
+
+    # Getting top 30 names from all CSV files with no repeats
+    # Need to give Athlete Data all the URLs
+    print("Getting Athlete NAMES_______________")
+    getting_athlete_names()
+    print("Done getting Athlete NAMES_______________\n")
+    
