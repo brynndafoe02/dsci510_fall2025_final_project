@@ -2,14 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-# need to gather my total list of athletes later, but starting and testing with four URLs first
-# urls = [
-#     "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=197224&type=career",
-#     "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=182830",
-#     "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=170101",
-#     "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=174753"
-# ]
-
 def get_skier_data(url, i):
     first_name = None
     last_name = None
@@ -114,12 +106,6 @@ def get_skier_data(url, i):
         "Age": age,
         "Gender": gender
     }
-
-    
-# all_skiers = []
-# for url in urls:
-#     skier_data = get_skier_data(url)
-#     all_skiers.append(skier_data)
 
 def make_athlete_data_csv(all_skiers : list):
     csv_file_name = "AthleteData.csv"
