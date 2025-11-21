@@ -19,7 +19,9 @@ def get_WC_results(pdf_urls : dict):
             pdf_name = pdf_split[-1] # just naming it what ever the end of the URL is since that part is unique (and also shows what ski season it is for *2025FS8105RLF.pdf* -> 2025 ski season
             pdf_path = os.path.join("FIS_scoresheet_pdfs", pdf_name)
             # creating path where pdf will go 
-            headers = {"User-Agent": "WorldCupResults/Skiing"}
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+                "Connection": "keep-alive"}
             url_contents = requests.get(url, headers=headers, timeout=10)
             with open(file=pdf_path, mode="wb") as f:
                 # using "wb" because "w" is used for things like CSV files or text,

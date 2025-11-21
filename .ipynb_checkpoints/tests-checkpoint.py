@@ -62,10 +62,12 @@ if __name__ == "__main__":
     # need to gather my total list of athletes later, but starting and testing with four URLs first
     urls = ["https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=197224&type=career", "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=182830", "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=170101", "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=174753"]
     all_skiers = []
+    i = 0
     for url in urls:
-        skier_data = get_skier_data(url)
+        skier_data = get_skier_data(url, i)
         all_skiers.append(skier_data)
-    make_athlete_data_csv(all_skiers)
+        i+=1
+    #make_athlete_data_csv(all_skiers)
     # ^^^ this .py file was actually the first one I made out of the 3
     # so the csv ouput is a separate function,
     # but I plan on condensing it all into one function later
@@ -76,7 +78,7 @@ if __name__ == "__main__":
     # Getting top 30 names from all CSV files with no repeats
     # Need to give Athlete Data all the URLs
     print("Getting Athlete NAMES_______________")
-    getting_athlete_names()
+    #getting_athlete_names()
     print("Done getting Athlete NAMES_______________\n")
 
     #################################################################
@@ -85,11 +87,13 @@ if __name__ == "__main__":
     print("Getting Athlete Data_______________")
     # need to gather my total list of athletes later, but starting and testing with four URLs first
     urls = return_athlete_urls()
-    all_skiers = []
+    all_mogul_skiers = []
+    j = 0
     for url in urls:
-        skier_data = get_skier_data(url)
-        all_skiers.append(skier_data)
-    make_athlete_data_csv(all_skiers)
+        skier_data = get_skier_data(url, j)
+        all_mogul_skiers.append(skier_data)
+        j+=1
+    make_athlete_data_csv(all_mogul_skiers)
     # ^^^ this .py file was actually the first one I made out of the 3
     # so the csv ouput is a separate function,
     # but I plan on condensing it all into one function later
