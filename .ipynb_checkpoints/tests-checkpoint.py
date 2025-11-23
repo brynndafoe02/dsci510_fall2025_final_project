@@ -5,12 +5,14 @@ import json
 import re
 import pdfplumber
 import os
+import glob
 from World_Cup_Results import get_WC_results
 from Olympic_Results import get_olympic_results
 from Athlete_Data import get_skier_data, make_athlete_data_csv
 from Getting_Athlete_Names import getting_athlete_names
 from Athlete_URLs import return_athlete_urls
 from Getting_WC_URLs import return_wc_urls
+from Input_LogR import get_fis_code, pull_data_for_athlete
 
 if __name__ == "__main__":
     
@@ -61,12 +63,12 @@ if __name__ == "__main__":
     print("Getting Athlete Data_______________")
     # need to gather my total list of athletes later, but starting and testing with four URLs first
     urls = ["https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=197224&type=career", "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=182830", "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=170101", "https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=FS&competitorid=174753"]
-    all_skiers = []
-    i = 0
-    for url in urls:
-        skier_data = get_skier_data(url, i)
-        all_skiers.append(skier_data)
-        i+=1
+    # all_skiers = []
+    # i = 0
+    # for url in urls:
+    #     skier_data = get_skier_data(url, i)
+    #     all_skiers.append(skier_data)
+    #     i+=1
     #make_athlete_data_csv(all_skiers)
     # ^^^ this .py file was actually the first one I made out of the 3
     # so the csv ouput is a separate function,
@@ -86,16 +88,27 @@ if __name__ == "__main__":
     # Athlete Data -> REAL
     print("Getting Athlete Data_______________")
     # need to gather my total list of athletes later, but starting and testing with four URLs first
-    urls = return_athlete_urls()
-    all_mogul_skiers = []
-    j = 0
-    for url in urls:
-        skier_data = get_skier_data(url, j)
-        all_mogul_skiers.append(skier_data)
-        j+=1
-    make_athlete_data_csv(all_mogul_skiers)
+    # urls = return_athlete_urls()
+    # all_mogul_skiers = []
+    # j = 0
+    # for url in urls:
+    #     skier_data = get_skier_data(url, j)
+    #     all_mogul_skiers.append(skier_data)
+    #     j+=1
+    # make_athlete_data_csv(all_mogul_skiers)
     # ^^^ this .py file was actually the first one I made out of the 3
     # so the csv ouput is a separate function,
     # but I plan on condensing it all into one function later
     print("Done getting Athlete Data_______________\n")
+
+    #################################################################
+
+    fis_list = get_fis_code()
+
+    skier_data = pull_data_for_athlete("2484937", 1)
+    for key, value in skier_data.items():
+        print(f"{key} : {value}")
+    #print(skier_data)
+    
+    
     
