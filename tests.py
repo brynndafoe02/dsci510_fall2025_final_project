@@ -6,6 +6,7 @@ import re
 import pdfplumber
 import os
 import glob
+import numpy as np
 from World_Cup_Results import get_WC_results
 from Olympic_Results import get_olympic_results
 from Athlete_Data import get_skier_data, make_athlete_data_csv
