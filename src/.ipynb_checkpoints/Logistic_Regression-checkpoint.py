@@ -45,7 +45,6 @@ def running_logistic_regression(training_file_name: str, testing_file_name: str,
 
     # predict probabilities 
     test_df['predicted_prob_top5'] = model.predict_proba(X_test)[:, 1]
-        # optional below: predicted class using 0.5 threshold
     test_df['predicted_top5'] = (test_df['predicted_prob_top5'] >= 0.5).astype(int)
 
     # rank athletes by probability
