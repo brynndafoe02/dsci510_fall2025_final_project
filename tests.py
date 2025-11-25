@@ -18,7 +18,7 @@ from src.World_Cup_Results import get_WC_results
 from src.Olympic_Results import get_olympic_results
 from src.Athlete_Data import get_skier_data, make_athlete_data_csv
 from src.Input_LogR import get_fis_code, pull_data_for_athlete
-from src.Logistic_Regression import running_logistic_regression
+from src.Logistic_Regression import running_logr_model
 
 if __name__ == "__main__":
     
@@ -198,9 +198,9 @@ if __name__ == "__main__":
     womens_coefficients_file = "../data/Womens_Coefficients.csv"
     
     print("Running LR for Men")
-    running_logistic_regression(men_training_file_name, men_testing_file_name, mens_LR_model, mens_coefficients_file)
+    running_logr_model(men_training_file_name, men_testing_file_name, mens_LR_model, mens_coefficients_file)
     print("Running LR for Women")
-    running_logistic_regression(women_training_file_name, women_testing_file_name, womens_LR_model, womens_coefficients_file)
+    running_logr_model(women_training_file_name, women_testing_file_name, womens_LR_model, womens_coefficients_file)
 
     print("Done running the Logistic Regression Model_______________\n")
     
