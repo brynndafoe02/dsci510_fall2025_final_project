@@ -7,7 +7,11 @@ import os
 from collections import defaultdict
 
 def get_WC_results():
-    os.makedirs("FIS_scoresheet_pdfs", exist_ok=True)
+    base_directory = os.path.dirname(os.path.dirname(__file__))
+    data_directory = os.path.join(base_directory, "data")
+
+    pdf_folder = os.path.join(data_directory, "FIS_scoresheet_pdfs")
+    os.makedirs(pdf_folder, exist_ok=True)
     # Since I will be making folders of my data I am using os to make directories
     # Making a directory for the pdf files scraped or else all the pdf files just populate
     # in the directory I am working in and makes it messy
@@ -23,11 +27,10 @@ def get_WC_results():
     pdf_urls = dict(pdf_urls)
     
     for ski_season in pdf_urls:
-        os.makedirs(ski_season, exist_ok=True) # make folder for this particular season
         for url in pdf_urls[ski_season]:
             pdf_split = url.split("/")
             pdf_name = pdf_split[-1] # just naming it what ever the end of the URL is since that part is unique (and also shows what ski season it is for *2025FS8105RLF.pdf* -> 2025 ski season
-            pdf_path = os.path.join("FIS_scoresheet_pdfs", pdf_name)
+            pdf_path = os.path.join(pdf_folder, pdf_name)
             # creating path where pdf will go 
             headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
@@ -90,9 +93,6 @@ def get_WC_results():
                         # gathering the rest of the scores, will filter out for the scores I care about in the csv part
     
                         extracted_data.append([rank, fis_code, full_name, nation, birth_year] + other_values)
-
-            base_directory = os.path.dirname(os.path.dirname(__file__))
-            data_directory = os.path.join(base_directory, "data")
 
             season_directory = os.path.join(data_directory, ski_season)
             os.makedirs(season_directory, exist_ok=True)

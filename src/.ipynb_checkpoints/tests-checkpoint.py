@@ -186,17 +186,11 @@ if __name__ == "__main__":
 
     # Running the Logistic Regression Model
     print("Running the Logistic Regression Model_______________")
-
-    men_training_file_name = "../data/Training_Data_Men.csv"
-    men_testing_file_name = "../data/Testing_Data_Men.csv"
-    women_training_file_name = "../data/Training_Data_Women.csv"
-    women_testing_file_name = "../data/Testing_Data_Women.csv"
     
-    mens_LR_model = "../data/Mens_Testing_Data_Ranked.csv"
-    womens_LR_model = "../data/Womens_Testing_Data_Ranked.csv"
-    mens_coefficients_file = "../data/Mens_Coefficients.csv"
-    womens_coefficients_file = "../data/Womens_Coefficients.csv"
-    
+    mens_LR_model = 'data/Mens_Testing_Data_Ranked.csv'
+    womens_LR_model = 'data/Womens_Testing_Data_Ranked.csv'
+    mens_coefficients_file = 'data/Mens_Coefficients.csv'
+    womens_coefficients_file = 'data/Womens_Coefficients.csv'
     print("Running LR for Men")
     running_logistic_regression(men_training_file_name, men_testing_file_name, mens_LR_model, mens_coefficients_file)
     print("Running LR for Women")
