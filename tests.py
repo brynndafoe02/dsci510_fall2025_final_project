@@ -91,6 +91,7 @@ if __name__ == "__main__":
     #################################################################
 
     # Creating the Training and Testing Files
+    # !!! This uses the CLEANED data from the cleaned folder inside data, so this does not use any of the raw data files !!!
     print("Creating the Training and Testing Files for the Logistic Regression Model_______________")
 
     fis_list = get_fis_code() # getting a list of all the FIS Codes (the reliable identifiers, compared to names which I noticed on some score sheets are spelled differently sometimes)

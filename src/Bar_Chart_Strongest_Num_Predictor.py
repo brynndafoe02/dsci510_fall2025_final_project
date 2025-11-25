@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df_women = pd.read_csv("../data/Mens_Testing_Data_Ranked.csv")
+df_women = pd.read_csv("../data/Womens_Testing_Data_Ranked.csv")
 df_women.columns = df_women.columns.str.strip()
 
 df_women_top10_prob = df_women.sort_values('predicted_prob_top5', ascending=False).head(10)
@@ -23,7 +23,8 @@ plt.barh(df_women_top10_rank['Name'], df_women_top10_rank['Avg Time Points'], co
 
 plt.xlabel('Average Time Points')
 plt.ylabel('Skier')
-plt.title("Men's Singles Moguls: Top 10 Average Time Points")
+plt.title("Women's Singles Moguls: Top 10 Average Time Points")
 plt.grid(axis='x', linestyle='--', alpha=0.5)
+plt.xlim(12, 20)
 plt.tight_layout()
 plt.show()
