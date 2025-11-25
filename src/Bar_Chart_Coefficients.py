@@ -1,8 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-coeffs_df1 = pd.read_csv("../data/mens_coefficients.csv")
-coeffs_df = pd.read_csv("../data/womens_coefficients.csv")
+coeffs_df = pd.read_csv("../data/Mens_Coefficients.csv")
+coeffs_df1 = pd.read_csv("../data/Womens_Coefficients.csv")
 
 coeffs_df['abs_coef'] = coeffs_df['coefficient'].abs()
 coeffs_df = coeffs_df.sort_values('abs_coef', ascending=True)
