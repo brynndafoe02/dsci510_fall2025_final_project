@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import csv
+import sys
 # !!! followed online documentation on how to use scikit's logistic regression 
 from sklearn.linear_model import LogisticRegression
 # ^ the actual model to be used
@@ -13,25 +14,30 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 # ^ creates the flow in which the model can work 
 
+# need to access config from root
+root = os.path.dirname(os.path.dirname(__file__))
+sys.path.append(root)
+
+from config import DATA_FOLDER, FINAL_TRAINING_FILE_MEN, FINAL_TRAINING_FILE_WOMEN, FINAL_TESTING_FILE_MEN, FINAL_TESTING_FILE_WOMEN, TESTING_DATA_RANKED_MEN, TESTING_DATA_RANKED_WOMEN, COEFFICIENTS_MEN, COEFFICIENTS_WOMEN
+
+sys.path.remove(root)
+# return to running from src
+
 def running_logr_model(gender: str):
     
     base_directory = os.path.dirname(os.path.dirname(__file__))
-    data_directory = os.path.join(base_directory, "data")
+    data_directory = os.path.join(base_directory, DATA_FOLDER)
 
     if gender == "men":
-        training_file = os.path.join(data_directory, "Training_Data_Men.csv")
-        testing_file = os.path.join(data_directory, "Testing_Data_Men.csv")
-        data_ranked_file_name = "Mens_Testing_Data_Ranked.csv"
-        data_ranked_file = os.path.join(data_directory, data_ranked_file_name)
-        coefficients_file_name = "Mens_Coefficients.csv"
-        coefficients_file = os.path.join(data_directory, coefficients_file_name)
+        training_file = os.path.join(data_directory, FINAL_TRAINING_FILE_MEN)
+        testing_file = os.path.join(data_directory, FINAL_TESTING_FILE_MEN)
+        data_ranked_file = os.path.join(data_directory, TESTING_DATA_RANKED_MEN)
+        coefficients_file = os.path.join(data_directory, COEFFICIENTS_MEN)
     elif gender == "women":
-        training_file = os.path.join(data_directory, "Training_Data_Women.csv")
-        testing_file = os.path.join(data_directory, "Testing_Data_Women.csv")
-        data_ranked_file_name = "Womens_Testing_Data_Ranked.csv"
-        data_ranked_file = os.path.join(data_directory, data_ranked_file_name)
-        coefficients_file_name = "Womens_Coefficients.csv"
-        coefficients_file = os.path.join(data_directory, coefficients_file_name)
+        training_file = os.path.join(data_directory, FINAL_TRAINING_FILE_WOMEN)
+        testing_file = os.path.join(data_directory, FINAL_TESTING_FILE_WOMEN)
+        data_ranked_file = os.path.join(data_directory, TESTING_DATA_RANKED_WOMEN)
+        coefficients_file = os.path.join(data_directory, COEFFICIENTS_WOMEN)
    
     # reading the training and testing files
     training_df = pd.read_csv(training_file)

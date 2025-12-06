@@ -4,15 +4,25 @@ import pdfplumber
 # so using pdfplumber to extract the data
 import csv
 import os
+import sys
 from collections import defaultdict
+
+# need to access config from root
+root = os.path.dirname(os.path.dirname(__file__))
+sys.path.append(root)
+
+from config import DATA_FOLDER, FIS_PDFS_FOLDER, WORLD_CUP_URLS
+
+sys.path.remove(root)
+# return to running from src
 
 def get_WC_results():
     base_directory = os.path.dirname(os.path.dirname(__file__))
-    data_directory = os.path.join(base_directory, "data")
-    pdf_folder = os.path.join(data_directory, "FIS_scoresheet_pdfs")
+    data_directory = os.path.join(base_directory, DATA_FOLDER)
+    pdf_folder = os.path.join(data_directory, FIS_PDFS_FOLDER)
     os.makedirs(pdf_folder, exist_ok=True) # will not make folder if it already exists
 
-    world_cup_urls = os.path.join(data_directory, "World_Cup_URLs.csv")
+    world_cup_urls = os.path.join(data_directory, WORLD_CUP_URLS)
 
     pdf_urls = defaultdict(list)
 

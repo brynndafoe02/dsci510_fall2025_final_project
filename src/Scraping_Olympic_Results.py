@@ -3,6 +3,16 @@ import requests
 import re
 import csv
 import os
+import sys
+
+# need to access config from root
+root = os.path.dirname(os.path.dirname(__file__))
+sys.path.append(root)
+
+from config import DATA_FOLDER, CLEANED_OLYMPIC_RESULTS
+
+sys.path.remove(root)
+# return to running from src
 
 # when I do "Show Page Source" I found the data I wanted, but it did not look like HTML
 # so when looking it up I found that the area in which I want to pull data from
@@ -10,8 +20,8 @@ import os
 
 def get_olympic_results(urls_olympics : dict):
     base_directory = os.path.dirname(os.path.dirname(__file__))
-    data_directory = os.path.join(base_directory, "data")
-    output_folder = os.path.join(data_directory, "olympic_results")
+    data_directory = os.path.join(base_directory, DATA_FOLDER)
+    output_folder = os.path.join(data_directory, CLEANED_OLYMPIC_RESULTS)
     
     # Will not make the folder if it exists already
     os.makedirs(output_folder, exist_ok=True)

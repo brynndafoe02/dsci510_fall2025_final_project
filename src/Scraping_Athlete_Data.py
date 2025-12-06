@@ -2,6 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import os
+import sys
+
+# need to access config from root
+root = os.path.dirname(os.path.dirname(__file__))
+sys.path.append(root)
+
+from config import DATA_FOLDER, RAW_ATHLETE_DATA
+
+sys.path.remove(root)
+# return to running from src
 
 def get_skier_data(url, i):
     
@@ -113,8 +123,8 @@ def get_skier_data(url, i):
 
 def make_athlete_data_csv(all_skiers : list):
     base_directory = os.path.dirname(os.path.dirname(__file__))
-    data_directory = os.path.join(base_directory, "data")
-    csv_file_name = os.path.join(data_directory, "Athlete_Data.csv")
+    data_directory = os.path.join(base_directory, DATA_FOLDER)
+    csv_file_name = os.path.join(data_directory, RAW_ATHLETE_DATA)
 
     with open(file=csv_file_name, mode='w') as f:
         column_names = "Name, FIS Code, Birthdate, Birth Year, Age, Gender\n"

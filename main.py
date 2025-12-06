@@ -20,6 +20,7 @@ from src.Scraping_Athlete_Data import get_skier_data, make_athlete_data_csv
 from src.Input_for_LogR import get_fis_code, pull_data_for_athlete, update_train_test_files
 from src.Running_Logistic_Regression import running_logr_model
 from src.Create_Train_Test_Files import creating_train_test_files
+from config import DATA_FOLDER, ATHLETE_URLS, URLS_OLYMPICS
 
 if __name__ == "__main__":
 
@@ -55,11 +56,7 @@ if __name__ == "__main__":
     # Scraping Olympic Results
     print("Getting Olympic Results_______________")
 
-    urls_olympics = {
-        "M_2018_1" : "https://www.olympics.com/en/olympic-games/pyeongchang-2018/results/freestyle-skiing/mens-moguls", 
-        "W_2018_1" : "https://www.olympics.com/en/olympic-games/pyeongchang-2018/results/freestyle-skiing/ladies-moguls", 
-        "M_2022_2" : "https://www.olympics.com/en/olympic-games/beijing-2022/results/freestyle-skiing/men-moguls", 
-        "W_2022_2" : "https://www.olympics.com/en/olympic-games/beijing-2022/results/freestyle-skiing/women-moguls"}
+    urls_olympics = URLS_OLYMPICS
     
     # get_olympic_results(urls_olympics) # -> scrapes the data and creates the csv files
     print("Done getting Olympic Results_______________\n")
@@ -73,9 +70,9 @@ if __name__ == "__main__":
     biography_urls = []
     
     # # making a list of the Athlete Biography URLs from the csv file holding them
-    # data_directory = os.path.join("data")
+    # data_directory = os.path.join(DATA_FOLDER)
     
-    # athlete_urls_file_path = os.path.join(data_directory, "Athlete_URLs.csv")
+    # athlete_urls_file_path = os.path.join(data_directory, ATHLETE_URLS)
     # with open(file=athlete_urls_file_path, mode="r") as f:
     #     next(f)
     #     for url in f:

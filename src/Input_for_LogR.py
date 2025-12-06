@@ -1,15 +1,25 @@
 import csv
 import glob
 import os
+import sys
 import numpy as np
+
+# need to access config from root
+root = os.path.dirname(os.path.dirname(__file__))
+sys.path.append(root)
+
+from config import DATA_FOLDER, CLEANED_FOLDER, CLEANED_ATHLETE_DATA, CLEANED_OLYMPIC_RESULTS, FINAL_TRAINING_FILE_MEN, FINAL_TRAINING_FILE_WOMEN, FINAL_TESTING_FILE_MEN, FINAL_TESTING_FILE_WOMEN
+
+sys.path.remove(root)
+# return to running from src
 
 def get_fis_code():
 
     base_directory = os.path.dirname(os.path.dirname(__file__))
-    data_directory = os.path.join(base_directory, "data")
-    cleaned_folder = os.path.join(data_directory, "cleaned")
+    data_directory = os.path.join(base_directory, DATA_FOLDER)
+    cleaned_folder = os.path.join(data_directory, CLEANED_FOLDER)
 
-    file_path = os.path.join(cleaned_folder, "AthleteData.csv")
+    file_path = os.path.join(cleaned_folder, CLEANED_ATHLETE_DATA)
 
     fis_codes = []
 
@@ -28,8 +38,8 @@ def get_fis_code():
 
 def pull_data_for_athlete(fis_code: str, olympic_cycle: int):
     base_directory = os.path.dirname(os.path.dirname(__file__))
-    data_directory = os.path.join(base_directory, "data")
-    cleaned_folder = os.path.join(data_directory, "cleaned")
+    data_directory = os.path.join(base_directory, DATA_FOLDER)
+    cleaned_folder = os.path.join(data_directory, CLEANED_FOLDER)
     
     if olympic_cycle == 1:
         olympic_year = 2018
@@ -56,7 +66,7 @@ def pull_data_for_athlete(fis_code: str, olympic_cycle: int):
     
     ########## get gender of athlete
 
-    athlete_data_file_path = os.path.join(cleaned_folder, "AthleteData.csv")
+    athlete_data_file_path = os.path.join(cleaned_folder, CLEANED_ATHLETE_DATA)
     with open(file=athlete_data_file_path, mode="r") as f:
         csv_read = csv.DictReader(f)
         for row in csv_read:
@@ -69,7 +79,7 @@ def pull_data_for_athlete(fis_code: str, olympic_cycle: int):
     
     ########## get olympic data for athlete
     
-    olympic_results_folder_path = os.path.join(cleaned_folder, "olympic_results")
+    olympic_results_folder_path = os.path.join(cleaned_folder, CLEANED_OLYMPIC_RESULTS)
     
     csv_files_paths = glob.glob(os.path.join(olympic_results_folder_path, "*.csv"))
     o_year_file = f"_{olympic_cycle}.csv"
@@ -198,16 +208,16 @@ def update_train_test_files(skier_data, season: int):
         return
 
     base_directory = os.path.dirname(os.path.dirname(__file__))
-    data_directory = os.path.join(base_directory, "data")
+    data_directory = os.path.join(base_directory, DATA_FOLDER)
 
     # seasons 1 and 2 are for training the model, and season 3 is what I want to predict on
     # 1 = 2018, 2 = 2022, 3 = 2026
     if (season == 1) or (season == 2):
-        men_file = os.path.join(data_directory, "Training_Data_Men.csv")
-        women_file = os.path.join(data_directory, "Training_Data_Women.csv")
+        men_file = os.path.join(data_directory, FINAL_TRAINING_FILE_MEN)
+        women_file = os.path.join(data_directory, FINAL_TRAINING_FILE_WOMEN)
     elif season == 3:
-        men_file = os.path.join(data_directory, "Testing_Data_Men.csv")
-        women_file = os.path.join(data_directory, "Testing_Data_Women.csv")
+        men_file = os.path.join(data_directory, FINAL_TESTING_FILE_MEN)
+        women_file = os.path.join(data_directory, FINAL_TESTING_FILE_WOMEN)
 
     # creating the new line for the csv file 
     # season 3 will not have the "Made Top 5" column
