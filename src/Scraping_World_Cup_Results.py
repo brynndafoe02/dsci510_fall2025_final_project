@@ -9,17 +9,14 @@ from collections import defaultdict
 def get_WC_results():
     base_directory = os.path.dirname(os.path.dirname(__file__))
     data_directory = os.path.join(base_directory, "data")
-
     pdf_folder = os.path.join(data_directory, "FIS_scoresheet_pdfs")
-    os.makedirs(pdf_folder, exist_ok=True)
-    # Since I will be making folders of my data I am using os to make directories
-    # Making a directory for the pdf files scraped or else all the pdf files just populate
-    # in the directory I am working in and makes it messy
-    # If folder already exists it will not make a new folder
+    os.makedirs(pdf_folder, exist_ok=True) # will not make folder if it already exists
+
+    world_cup_urls = os.path.join(data_directory, "World_Cup_URLs.csv")
 
     pdf_urls = defaultdict(list)
 
-    with open(file="../data/World_Cup_URLs.csv", mode="r") as f:
+    with open(file=world_cup_urls, mode="r") as f:
         csv_read = csv.DictReader(f)
         for row in csv_read:
             pdf_urls[row["event"]].append(row["url"])
@@ -29,7 +26,7 @@ def get_WC_results():
     for ski_season in pdf_urls:
         for url in pdf_urls[ski_season]:
             pdf_split = url.split("/")
-            pdf_name = pdf_split[-1] # just naming it what ever the end of the URL is since that part is unique (and also shows what ski season it is for *2025FS8105RLF.pdf* -> 2025 ski season
+            pdf_name = pdf_split[-1] # just naming it what ever the end of the URL is since that part is unique
             pdf_path = os.path.join(pdf_folder, pdf_name)
             # creating path where pdf will go 
             headers = {
@@ -40,7 +37,7 @@ def get_WC_results():
                 # using "wb" because "w" is used for things like CSV files or text,
                 # but PDFs are binary files and may not be extracted correctly using just "w"
                 f.write(url_contents.content) # put content of that pdf to a file
-            print(f"Downloaded {pdf_name}") # using for testing, will take out later
+            print(f"Downloaded {pdf_name}")
     
             extracted_data = []
             with pdfplumber.open(pdf_path) as pdf:
@@ -53,25 +50,25 @@ def get_WC_results():
                     lines = text.split("\n") # splits text into lines
                     lines_merged = []
     
-                    for aline in lines: # will rename 'aline' later to something better
-                        one_line = aline.strip() # will rename 'one_line' later to something better
-                        if one_line == '': # if nothing, skip
+                    for page_line in lines:
+                        line = page_line.strip()
+                        if line == '': # if nothing, skip
                             continue
-                        # *** Below
-                        split_words = one_line.split() # split into list of words
+                        # *** LOOK AT BOTTOM
+                        split_words = line.split() # split into list of words
                         if split_words[0].isdigit() == True:
                             # *** the first instance where the first word is a digit is the start of the competitor data, so going to look for this data below 
-                            lines_merged.append(one_line)
+                            lines_merged.append(line)
                         else:
                             if len(lines_merged) != 0: # doing this so we don't get an index error in the next line
                                 # attach to last skier in merged lines because it is a continuation of their scores
                                 last_line = lines_merged[-1]
-                                new_line = last_line + " " + one_line
+                                new_line = last_line + " " + line
                                 lines_merged[-1] = new_line
                             # merging lines because as shown in ***, I want data on the first line with the competitor's name and the third line, because the third line has the final points for each area of points without all the deductions and stuff
                         
-                    for bline in lines_merged: # will rename 'bline' later to something better
-                        words = bline.split()
+                    for data_line in lines_merged:
+                        words = data_line.split()
     
                         # rank0, bib1, fis_code2, last_name3, first_name4, nation5, birth_year6, scores7
                         if len(words) >= 7:
@@ -97,7 +94,7 @@ def get_WC_results():
             season_directory = os.path.join(data_directory, ski_season)
             os.makedirs(season_directory, exist_ok=True)
     
-            csv_name = pdf_name.replace(".pdf", ".csv") # easy name, might change later
+            csv_name = pdf_name.replace(".pdf", ".csv") # easy name
             csv_path = os.path.join(season_directory, csv_name) # connect
             with open(file=csv_path, mode="w", encoding="utf-8") as f:
                 # opened pdf file above in binary mode, so here when using regular "w" I need to use encoding or else I get errors
@@ -113,7 +110,7 @@ def get_WC_results():
                         new_line = f"{row[0]}, {row[1]}, {row[2]}, {row[3]}, {row[4]}, {row[18]}, {row[30]}, {row[31]}, {row[32]}\n" 
                         f.write(new_line)
     
-            print(f"Saved {len(extracted_data)} rows to {csv_path}") # used for testing, will delete later
+            print(f"Saved {len(extracted_data)} rows to {csv_path}")
 
 # ***
 # first lines look like this

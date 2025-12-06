@@ -11,15 +11,13 @@ import os
 def get_olympic_results(urls_olympics : dict):
     base_directory = os.path.dirname(os.path.dirname(__file__))
     data_directory = os.path.join(base_directory, "data")
-
     output_folder = os.path.join(data_directory, "olympic_results")
     
-    # since I am making a folder I am using os to create it, will not make the folder if it exists already
+    # Will not make the folder if it exists already
     os.makedirs(output_folder, exist_ok=True)
     
     for olympic_year, url in urls_olympics.items(): # -> {what year + gender : url}
-    #for url in urls_olympics:
-        print(f"Processing: {url}") # for testing, will delete later
+        print(f"Processing: {url}")
         
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)", 
@@ -28,7 +26,7 @@ def get_olympic_results(urls_olympics : dict):
         response = requests.get(url, headers=headers, timeout=10)
         html = response.text
     
-        # what the source page shows with the data I want to pull -> *** BELOW
+        # what the source page shows with the data I want to pull -> *** LOOK AT BOTTOM
         # all the top 30 skiers are in the "standing":[xxx]
         pattern = r'"standing":(\[.*?\])'
         # "standing": -> matching literally
@@ -38,21 +36,21 @@ def get_olympic_results(urls_olympics : dict):
         # \] -> want to match literal ]
         match = re.search(pattern, html)
         if not match:
-            print("Could not find pattern") # for testing, will delete later
+            print("!!! Pattern not found.")
             continue
         standings_text = match.group(1) # grab first group
     
         data = json.loads(standings_text)
-        # converts the json string into parsable python type
-        # in this case it creates a very large list of dictionaries 
-        # looks like ****** BELOW
+        # if the string is in proper json format:
+            # json.loads will turn that string into a parsable python data strucutre
+            # in this case it creates a large dictionary 
+            # looks like ****** LOOK AT BOTTOM
     
         url_parts = url.split("/")
-        last_part = url_parts[-1] # easy file name, may change later
+        last_part = url_parts[-1] # easy file name
         filename = f"{olympic_year}.csv" # making .csv file name
         csv_path = os.path.join(output_folder, filename) # connecting
     
-        ####
         with open(file=csv_path, mode="w") as f:
             column_names = "Rank, Name, Country\n"
             f.write(column_names)

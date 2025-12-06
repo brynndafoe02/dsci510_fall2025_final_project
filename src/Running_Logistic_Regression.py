@@ -1,4 +1,6 @@
 import pandas as pd
+import os
+import csv
 # !!! followed online documentation on how to use scikit's logistic regression 
 from sklearn.linear_model import LogisticRegression
 # ^ the actual model to be used
@@ -11,21 +13,40 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 # ^ creates the flow in which the model can work 
 
-def running_logr_model(training_file_name: str, testing_file_name: str, output_file_name: str, coefficients_file_name: str):
+def running_logr_model(gender: str):
+    
+    base_directory = os.path.dirname(os.path.dirname(__file__))
+    data_directory = os.path.join(base_directory, "data")
+
+    if gender == "men":
+        training_file = os.path.join(data_directory, "Training_Data_Men.csv")
+        testing_file = os.path.join(data_directory, "Testing_Data_Men.csv")
+        data_ranked_file_name = "Mens_Testing_Data_Ranked.csv"
+        data_ranked_file = os.path.join(data_directory, data_ranked_file_name)
+        coefficients_file_name = "Mens_Coefficients.csv"
+        coefficients_file = os.path.join(data_directory, coefficients_file_name)
+    elif gender == "women":
+        training_file = os.path.join(data_directory, "Training_Data_Women.csv")
+        testing_file = os.path.join(data_directory, "Testing_Data_Women.csv")
+        data_ranked_file_name = "Womens_Testing_Data_Ranked.csv"
+        data_ranked_file = os.path.join(data_directory, data_ranked_file_name)
+        coefficients_file_name = "Womens_Coefficients.csv"
+        coefficients_file = os.path.join(data_directory, coefficients_file_name)
+   
     # reading the training and testing files
-    train_df = pd.read_csv(training_file_name)
-    test_df = pd.read_csv(testing_file_name)
+    training_df = pd.read_csv(training_file)
+    testing_df = pd.read_csv(testing_file)
     # put into DataFrames
-    train_df.columns = train_df.columns.str.strip()
-    test_df.columns = test_df.columns.str.strip()
+    training_df.columns = training_df.columns.str.strip()
+    testing_df.columns = testing_df.columns.str.strip()
     
     # Defining the Features, numeric and categorical
     features = ['Nation', 'Age', 'Gender', 'Avg Final Score', 'Avg Turn Points', 'Avg Time Points', 'Avg Air Points', 'Avg Rank', 'Standard Deviation FS', 'Olympic Year']
 
     # List of features to be used -> X
-    X_train = train_df[features]
-    X_test = test_df[features]
-    y_train = train_df['Made Top 5'] # -> target variable
+    X_training = training_df[features]
+    X_testing = testing_df[features]
+    Y_training = training_df['Made Top 5'] # -> target variable
 
     # Pre processing -> defining which features are numeric and categorical 
     numeric_features = ['Age', 'Avg Final Score', 'Avg Turn Points', 'Avg Time Points', 'Avg Air Points', 'Avg Rank', 'Standard Deviation FS', 'Olympic Year']
@@ -47,25 +68,25 @@ def running_logr_model(training_file_name: str, testing_file_name: str, output_f
         ('classifier', LogisticRegression(max_iter=1000))])
 
     # fit model with the training data
-    model.fit(X_train, y_train)
+    model.fit(X_training, Y_training)
 
     # saving weights / coefficients for each variable
     feature_names = model.named_steps['preprocessor'].get_feature_names_out()
         # reverts from the binary encoding back to categorical feature name
-    logreg = model.named_steps['classifier']
-    coefs_df = pd.DataFrame({'feature': feature_names, 'coefficient': logreg.coef_[0]})
+    log_reg = model.named_steps['classifier']
+    coefficients_df = pd.DataFrame({'feature': feature_names, 'coefficient': log_reg.coef_[0]})
         # makes DataFrame of coefficients
-    coefs_df['abs_coef'] = coefs_df['coefficient'].abs()
-    coefs_df = coefs_df.sort_values('abs_coef', ascending=False) 
+    coefficients_df['abs_coef'] = coefficients_df['coefficient'].abs()
+    coefficients_df = coefficients_df.sort_values('abs_coef', ascending=False) 
         # ^ sort by absolute value of the variable, ascending
-    coefs_df[['feature', 'coefficient']].to_csv(coefficients_file_name, index=False)
+    coefficients_df[['feature', 'coefficient']].to_csv(coefficients_file, index=False)
 
     # predict probabilities of making top 5
-    test_df['predicted_prob_top5'] = model.predict_proba(X_test)[:, 1]
-    # uses common threshold of 0.5 to show: made top 5, did not make top 5 (0, 1)
-    test_df['predicted_top5'] = (test_df['predicted_prob_top5'] >= 0.5).astype(int)
+    testing_df['predicted_prob_top5'] = model.predict_proba(X_testing)[:, 1]
+    # uses threshold of 0.5 to show: made top 5, did not make top 5 (0 or 1)
+    testing_df['predicted_top5'] = (testing_df['predicted_prob_top5'] >= 0.5).astype(int)
 
     # rank athletes by probability
-    ranked_df = test_df.sort_values(by='predicted_prob_top5', ascending=False)
+    ranked_df = testing_df.sort_values(by='predicted_prob_top5', ascending=False)
     ranked_df['rank'] = range(1, len(ranked_df) + 1)
-    ranked_df.to_csv(output_file_name, index=False)
+    ranked_df.to_csv(data_ranked_file, index=False)

@@ -4,6 +4,8 @@ import csv
 import os
 
 def get_skier_data(url, i):
+    
+    # default values in case there are missing values
     first_name = None
     last_name = None
     full_athlete_name = None
@@ -12,18 +14,25 @@ def get_skier_data(url, i):
     age = None
     gender = None
     
-    print(f"     Skier {i}")
+    print(f"     Skier {i}") # to keep track of what skier it is on. Expecting 369
                 
+    # the athlete bio URLs were giving me the most trouble when trying to access them
+    # so had to add on to with User-Agent:
+        # will accept any sort of response (HTML, XML, other)
+        # prefer English
+        # keep connection alive 
+        # make it look like the request came from FIS
     headers = {
         "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
         "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"),
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9",
         "Connection": "keep-alive",
-        "Referer": "https://www.fis-ski.com/DB/general/athletes.html",
-        "Upgrade-Insecure-Requests": "1"}
- # pretending to be a browser or else I get an error
+        "Referer": "https://www.fis-ski.com/DB/general/athletes.html"}
 
+    # my requests kept timing out, so if it does time out:
+        # skip url, but tell me which url was skipped so I can add the data from that url manually
+        # Eventually it started working so that no urls were skipped for me
     try:
         response = requests.get(url, headers=headers, timeout=10)
     except requests.exceptions.Timeout:
@@ -32,10 +41,12 @@ def get_skier_data(url, i):
     except requests.exceptions.RequestException as e:
         print("Request error. Skipping: ", url, "\n   Error:", e)
         return None
+
+    ############################################
     
     soup = BeautifulSoup(response.text, "html.parser")
 
- # Going to the URL page and looking at 'Show Page Source' I can see where the data I want is held 
+    # Going to the URL page and looking at 'Show Page Source' I can see where the data I want is held 
         # so I can search for it properly in the following code
     first_name_data = soup.find("h1", class_="athlete-profile__name")
     if first_name_data:
@@ -50,8 +61,6 @@ def get_skier_data(url, i):
         last_name = last_name_data.text.strip()
     if first_name and last_name:
         full_athlete_name = f"{first_name} {last_name}"
-
-    ############ Going to condense this later into it's own function
 
     # want 1) FIS Code, 2) Birthdate, 3) Age, and 4) Gender
         # could get Nation here, but Nation will be captured in WC .py program
@@ -92,7 +101,7 @@ def get_skier_data(url, i):
     else:
         gender = None
 
-    ############
+    ############################################
     
     return {
         "Name": full_athlete_name,
@@ -105,7 +114,6 @@ def get_skier_data(url, i):
 def make_athlete_data_csv(all_skiers : list):
     base_directory = os.path.dirname(os.path.dirname(__file__))
     data_directory = os.path.join(base_directory, "data")
-
     csv_file_name = os.path.join(data_directory, "Athlete_Data.csv")
 
     with open(file=csv_file_name, mode='w') as f:
