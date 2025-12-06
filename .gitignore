@@ -6,7 +6,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 .ipynb_checkpoints/
-data/
+data/*
 data/cleaned/
 data/.ipynb_checkpoints
 data/FIS_scoresheet_pdfs
