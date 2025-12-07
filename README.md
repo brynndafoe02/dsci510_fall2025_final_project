@@ -71,6 +71,7 @@ How to Run:
 	- python tests.py
 - Run pipeline:
     - python main.py
+        - main.py is already configured to run with settings / paths. As long as my data from the Google Drive link is place in the data folder, running "python main.py" will produce results.
 
 Environment:
 - Python 3.11 or higher (I am using 3.12.5)
