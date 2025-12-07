@@ -6,7 +6,7 @@ Data Sources:
 | Data Source | Description | Approach | Size |
 |---------|----------|----------|----------|
 | FIS World Cup Singles Moguls Results | Results from World Cup events from the 2015 season to the 2025 season. Collected: Rank, FIS Code, Name, Nation, Birth Year, Final Score (out of 100), Time Points (out of 20), Air Points (out of 20), and Turn Points (out of 60). | Used pdfplumber to scrape the data since the score sheets were only available via downloadable pdf files. | Raw: 4678. Cleaned: 3342 |
-| Olympic Singles Moguls Resuls | Results from the 2018 Pyeongchang Olympics and 2022 Beijing Olympics. Collected: Rank, Name, and Country. | Used json and regular expression to web scrape the data due to the data being in a json embedded portion of the html. | Raw: 120. Cleaned: 118 |
+| Olympic Singles Moguls Resuls | Results from the 2018 Pyeongchang Olympics and 2022 Beijing Olympics. Collected: Rank, Name, and Country. | Used json and regular expression to web scrape the data due to the data being in a json embedded portion of the html. | Raw: 120. Cleaned: 118 (ended up reducing the scope of my project, so ended up with less data in this category than originally expected)|
 | FIS Athlete Biographies | Data from the each athlete’s biography page on the FIS website. Collected: Name, FIS Code, Birth Year, Age, and Gender. | Used BeautifulSoup to web scrape the data. | Raw: 370. Cleaned 370 |
 
 Analysis:
