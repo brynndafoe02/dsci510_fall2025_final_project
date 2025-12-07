@@ -38,9 +38,11 @@ Files:
     - Shows the external Python libraries my project needs.
 - Create_Train_Test_Files.py
     - My program that sets up the training and testing csv files to be used by my logistic regression model with the column headers.
+- Creating_Bar_Charts.py
+    - My program that creates all the visual results, used in results.ipynb.
 - Input_for_LogR.py
     - My program that, from my cleaned data files, pulls all the data I want to provide to the logistic regression model (calculating averages and standard deviations of scores where needed) and populating this data into the appropriate testing or training files.
-- load_data.py
+- Load_Data.py
     - My program that creates DataFrames for one example of each type of data I collected (Olympic results, World Cup results, and athlete biography data).
 - Running_Logistic_Regression.py
     - My program that sets up and runs the logistic regression model and outputs the results into the proper files. 
