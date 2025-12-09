@@ -42,7 +42,7 @@ Files:
     - My program that creates all the visual results, used in results.ipynb.
 - Input_for_LogR.py
     - My program that, from my cleaned data files, pulls all the data I want to provide to the logistic regression model (calculating averages and standard deviations of scores where needed) and populating this data into the appropriate testing or training files.
-- Load_Data.py
+- load_data.py
     - My program that creates DataFrames for one example of each type of data I collected (Olympic results, World Cup results, and athlete biography data).
 - Running_Logistic_Regression.py
     - My program that sets up and runs the logistic regression model and outputs the results into the proper files. 
