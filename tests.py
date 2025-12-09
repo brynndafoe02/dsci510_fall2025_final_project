@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import glob
-from src.Load_Data import load_athlete_bio_data, load_world_cup_data, load_olympic_data
+from src.load_data import load_athlete_bio_data, load_world_cup_data, load_olympic_data
 
 if __name__ == "__main__":
     # checking if it:
